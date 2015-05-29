@@ -4,20 +4,33 @@
 
   var appendMovie = function(ul, result) {
     var node = document.createElement('li');
+
+    var detailsLink = createDetailsLink(result);
+    var favoriteLink = createFavoriteLink(result);
+
+    node.appendChild(detailsLink);
+    node.appendChild(favoriteLink);
+
+    ul.appendChild(node);
+  };
+
+  var createDetailsLink = function(result) {
     var detailsLink = document.createElement('span');
     detailsLink.classList.add('clickable');
     detailsLink.classList.add('link');
+    detailsLink.innerText = result.Title;
 
     detailsLink.addEventListener('click', function() {
       showDetails(result);
       return false;
     });
 
-    detailsLink.innerText = result.Title;
+    return detailsLink;
+  };
 
+  var createFavoriteLink = function(result) {
     var favoriteLink = document.createElement('span');
     favoriteLink.classList.add('clickable');
-
     favoriteLink.innerText = STAR_EMOJI;
 
     favoriteLink.addEventListener('click', function() {
@@ -30,9 +43,7 @@
       return false;
     });
 
-    node.appendChild(detailsLink);
-    node.appendChild(favoriteLink);
-    ul.appendChild(node);
+    return favoriteLink;
   };
 
   var addFavorite = function(result) {
