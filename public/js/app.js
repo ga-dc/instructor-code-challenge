@@ -5,7 +5,7 @@
     link.classList.add('clickable');
 
     link.addEventListener('click', function() {
-      showDetails();
+      showDetails(result);
       return false;
     });
 
@@ -14,7 +14,22 @@
     ul.appendChild(node);
   };
 
-  var showDetails = function() {
+  var showDetails = function(result) {
+    var detailsElement = document.querySelector("#movie-details");
+
+    while (detailsElement.hasChildNodes()) {
+      detailsElement.removeChild(detailsElement.lastChild);
+    }
+
+    for (var key in result) {
+      var term = document.createElement('dt');
+      term.innerText = key;
+      var definition = document.createElement('dd');
+      definition.innerText = result[key];
+
+      detailsElement.appendChild(term);
+      detailsElement.appendChild(definition);
+    }
   };
 
   document.querySelector('form').addEventListener('submit', function(event){
