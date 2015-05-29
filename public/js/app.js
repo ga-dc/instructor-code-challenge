@@ -7,11 +7,8 @@
   var appendMovie = function(ul, result) {
     var node = document.createElement('li');
 
-    var detailsLink = createDetailsLink(result);
-    var favoriteLink = createFavoriteLink(result);
-
-    node.appendChild(detailsLink);
-    node.appendChild(favoriteLink);
+    node.appendChild(createDetailsLink(result));
+    node.appendChild(createFavoriteLink(result));
 
     ul.appendChild(node);
   };
@@ -24,7 +21,6 @@
 
     detailsLink.addEventListener('click', function() {
       showDetails(result);
-      return false;
     });
 
     return detailsLink;
@@ -41,8 +37,6 @@
 
       // deactivte the current listener
       this.removeEventListener('click', favoriteListener, false);
-
-      return false;
     };
 
     favoriteLink.addEventListener('click', favoriteListener);
