@@ -18,11 +18,13 @@ end
 post '/favorites' do
   # file = JSON.parse(File.read('data.json'))  <== no handling for empty file
   file = JSON.parse(File.read('data.json')) rescue []
-  unless params[:name] && params[:oid]
-    return 'Invalid Request'
-  end  # <== missing this end
+  400 unless params[:name] && params[:oid]
   movie = { name: params[:name], oid: params[:oid] }
   file << movie
   File.write('data.json',JSON.pretty_generate(file))
   movie.to_json
+end
+
+error 400 do
+  'Invalid Request'
 end

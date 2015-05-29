@@ -36,7 +36,11 @@
   };
 
   var addFavorite = function(result) {
-    console.log('added', result);
+    var xhr = new XMLHttpRequest();
+    xhr.open('post', '/favorites', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    var data = "name=" + encodeURI(result.Title) + "&oid=" + result.imdbID;
+    xhr.send(data);
   };
 
   var showDetails = function(result) {
@@ -68,7 +72,8 @@
       for(var i = 0; i < results.length; i++){
         appendMovie(ul, results[i]);
       }
-  });
+    });
+
     xhr.send();
   });
 })();
