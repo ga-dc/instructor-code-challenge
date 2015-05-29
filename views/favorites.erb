@@ -7,14 +7,13 @@
     <title>Shmancy Movies</title>
   </head>
   <body>
-    <a href="/favorites">Favorites</a>
-    <form>
-      <input type="text" />
-      <button type="submit">Submit</button>
-    </form>
-    <ul id="movie-list">
+    <a href="/">Home</a>
+
+    <ul>
+      <% @movies.each do |movie| %>
+      <li><%= movie['name'] %></li>
+      <% end %>
     </ul>
-    <dl id="movie-details"></dl>
-  <script src="/js/app.js"></script>
   </body>
 </html>
+
