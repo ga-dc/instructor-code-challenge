@@ -1,4 +1,6 @@
 (function(){
+  'use strict';
+
   var STAR_EMOJI = '⭐';
   var CHECK_EMOJI = '✅';
 
@@ -33,15 +35,17 @@
     favoriteLink.classList.add('clickable');
     favoriteLink.innerText = STAR_EMOJI;
 
-    favoriteLink.addEventListener('click', function() {
+    var favoriteListener = function() {
       addFavorite(result);
       this.innerText = CHECK_EMOJI;
 
       // deactivte the current listener
-      this.removeEventListener('click', arguments.callee, false);
+      this.removeEventListener('click', favoriteListener, false);
 
       return false;
-    });
+    };
+
+    favoriteLink.addEventListener('click', favoriteListener);
 
     return favoriteLink;
   };
