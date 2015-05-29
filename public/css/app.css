@@ -1,5 +1,8 @@
 .clickable {
   cursor: pointer;
+}
+
+.link {
   text-decoration: underline;
   color: blue;
 }

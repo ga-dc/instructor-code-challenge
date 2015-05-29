@@ -1,17 +1,42 @@
 (function(){
+  var STAR_EMOJI = '⭐';
+  var CHECK_EMOJI = '✅';
+
   var appendMovie = function(ul, result) {
     var node = document.createElement('li');
-    var link = document.createElement('span');
-    link.classList.add('clickable');
+    var detailsLink = document.createElement('span');
+    detailsLink.classList.add('clickable');
+    detailsLink.classList.add('link');
 
-    link.addEventListener('click', function() {
+    detailsLink.addEventListener('click', function() {
       showDetails(result);
       return false;
     });
 
-    link.innerText = result.Title;
-    node.appendChild(link);
+    detailsLink.innerText = result.Title;
+
+    var favoriteLink = document.createElement('span');
+    favoriteLink.classList.add('clickable');
+
+    favoriteLink.innerText = STAR_EMOJI;
+
+    favoriteLink.addEventListener('click', function() {
+      addFavorite(result);
+      this.innerText = CHECK_EMOJI;
+
+      // deactivte the current listener
+      this.removeEventListener('click', arguments.callee, false);
+
+      return false;
+    });
+
+    node.appendChild(detailsLink);
+    node.appendChild(favoriteLink);
     ul.appendChild(node);
+  };
+
+  var addFavorite = function(result) {
+    console.log('added', result);
   };
 
   var showDetails = function(result) {
