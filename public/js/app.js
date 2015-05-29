@@ -1,8 +1,20 @@
 (function(){
   var appendMovie = function(ul, result) {
     var node = document.createElement('li');
-    node.innerText = result.Title;
+    var link = document.createElement('span');
+    link.classList.add('clickable');
+
+    link.addEventListener('click', function() {
+      showDetails();
+      return false;
+    });
+
+    link.innerText = result.Title;
+    node.appendChild(link);
     ul.appendChild(node);
+  };
+
+  var showDetails = function() {
   };
 
   document.querySelector('form').addEventListener('submit', function(event){
