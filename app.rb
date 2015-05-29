@@ -3,18 +3,22 @@ require 'sinatra'
 require 'json'  # <== missing this `require`
 
 def all_movies
+  # in case the file is empty or missing, return an empty collection
   JSON.parse(File.read('data.json')) rescue []
 end
 
 # get '/'  <== missing `do`
 get '/' do
-  #File.read('index.html')  <== missing path to file
+  # File.read('index.html')  <== missing path to file
   File.read('views/index.html')
 end
 
 # get 'favorites' do  <== missing initial slash
 get '/favorites', provides: :html do
-  @movies = all_movies.sort { |a, b| a['name'] <=> b['name'] }
+  @movies = all_movies.sort { |a, b|
+    # compare movies by name
+    a['name'] <=> b['name']
+  }
   erb :favorites
 end
 
